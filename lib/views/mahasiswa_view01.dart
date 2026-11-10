@@ -33,8 +33,10 @@ class MahasiswaView extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 30,
-                            backgroundImage: NetworkImage(mahasiswa.photo ??
-                                'https://w7.pngwing.com/pngs/358/81/png-transparent-computer-icons-graduation-ceremony-college-student-financial-aid-graduated-people-logo-graduation-ceremony.png'),
+                            backgroundImage: mahasiswa.photo != null
+                                ? NetworkImage(mahasiswa.photo!)
+                                    as ImageProvider
+                                : const AssetImage('assets/mahasiswa.png'),
                           ),
                           const SizedBox(width: 10),
                           Expanded(

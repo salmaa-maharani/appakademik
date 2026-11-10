@@ -1,9 +1,12 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
 import '../models/mata_kuliah.dart';
+import '../config.dart';
 
 class ApiService {
-  final String baseUrl = 'http://127.0.0.1:8000/api/mata-kuliah';
+  final String baseUrl = '${ApiConfig.host}/api/mata-kuliah';
 
   Future<List<MataKuliah>> fetchMataKuliah() async {
     final response = await http.get(

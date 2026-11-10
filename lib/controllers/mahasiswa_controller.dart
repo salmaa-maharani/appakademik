@@ -1,13 +1,16 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
 import 'dart:convert';
+
 import '../models/mahasiswa.dart';
+import '../config.dart';
 
 class MahasiswaController extends GetxController {
   var mahasiswaList = <Mahasiswa>[].obs;
 
   // untuk Flutter di Chrome
-  final String apiUrl = 'http://127.0.0.1:8000/api/mahasiswa';
+  final String apiUrl = '${ApiConfig.host}/api/mahasiswa';
 
   @override
   void onInit() {
@@ -22,8 +25,9 @@ class MahasiswaController extends GetxController {
     );
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
-      mahasiswaList.value =
-          data.map((item) => Mahasiswa.fromJson(item)).toList();
+      mahasiswaList.value = data
+          .map((item) => Mahasiswa.fromJson(item))
+          .toList();
     } else {
       throw Exception('Gagal Ambil Data mahasiswa');
     }
@@ -57,8 +61,7 @@ class MahasiswaController extends GetxController {
     if (response.statusCode == 200) {
       final index = mahasiswaList.indexWhere((m) => m.id == id);
       if (index != -1) {
-        mahasiswaList[index] =
-            Mahasiswa.fromJson(json.decode(response.body));
+        mahasiswaList[index] = Mahasiswa.fromJson(json.decode(response.body));
       }
     } else {
       throw Exception('Gagal Ubah Data mahasiswa');
